@@ -1,0 +1,66 @@
+.header {
+  height: 5.38rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  background-color: rgba(255, 255, 255, 1);
+}
+.wrapper {
+  display: flex;
+  gap: 60px;
+}
+.title {
+  font-family: "Gilroy-Bold", sans-serif;
+  cursor: pointer;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+}
+.menu {
+  width: 534.125rem;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(53, 55, 58, 1);
+}
+
+.menu li {
+  margin-right: 1.25rem;
+}
+
+.menu li:last-child {
+  margin-right: 0;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: rgba(1, 1, 1, 1);
+  transition: color 0.3s ease;
+}
+
+.menu li:hover a {
+  color: rgba(66, 158, 255, 1);
+}
+
+.userWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.userWrapper p {
+  cursor: pointer;
+}
+
+.circle {
+  height: 2.875rem;
+  width: 2.875rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(26, 184, 137, 1);
+  cursor: pointer;
+}

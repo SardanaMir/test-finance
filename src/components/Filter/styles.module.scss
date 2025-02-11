@@ -1,0 +1,25 @@
+.filterSwitcher {
+  display: flex;
+  background-color: #e1eaf7;
+  border-radius: 0.5rem;
+  padding: 0.125rem;
+  width: 23.875rem;
+  height: 2.875rem;
+  align-items: center;
+}
+
+.filterOption {
+  flex: 1;
+  text-align: center;
+  padding: 0.813rem;
+  cursor: pointer;
+  border-radius: 8px;
+  color: rgba(132, 150, 175, 1);
+  transition: background-color 0.3s;
+  font-size: 0.875rem;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(1, 1, 1, 1);
+}

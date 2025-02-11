@@ -1,0 +1,141 @@
+import React from "react";
+import Header from "../../components/Header/Header";
+import YearFilterButton from "../../components/YearFilterButton/YearFilterButton";
+import Filter from "../../components/Filter/Filter";
+import Button from "../../components/Button/Button";
+import Pagination from "../../components/Pagination/Pagination";
+import FilterBtn from "../../assets/icons/ic_filter 16.svg";
+import styles from "./styles.module.scss";
+
+const TableDataTitle = [
+  "Дата",
+  "Приход",
+  "Расход",
+  "Банк",
+  "Контрагент",
+  "Статья",
+  "Описание",
+];
+const TableDataBody = [
+  {
+    id: 1,
+    date: "10.01.2025",
+    amount: 999999000.0,
+    cost: 999999000.0,
+    bank: "Точка",
+    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
+    status: 2,
+    description:
+      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
+  },
+  {
+    id: 2,
+    date: "10.01.2025",
+    amount: 999999000.0,
+    cost: 999999000.0,
+    bank: "Точка",
+    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
+    status: 2,
+    description:
+      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
+  },
+  {
+    id: 3,
+    date: "10.01.2025",
+    amount: 999999000.1,
+    cost: 999999000.0,
+    bank: "Точка",
+    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
+    status: 2,
+    description:
+      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
+  },
+  {
+    id: 4,
+    date: "10.01.2025",
+    amount: 999999000.0,
+    cost: 999999000.0,
+    bank: "Точка",
+    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
+    status: 2,
+    description:
+      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
+  },
+  {
+    id: 5,
+    date: "10.01.2025",
+    amount: 999999000.0,
+    cost: 999999000.0,
+    bank: "Точка",
+    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
+    status: 2,
+    description:
+      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
+  },
+];
+
+const MainPage = () => {
+  const formatNumber = (number) => {
+    return number.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+  return (
+    <div className={styles.main}>
+      <Header />
+      <div className={styles.container}>
+        <div className={styles.subtitle}>Банки</div>
+      </div>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.block}>
+            <div className={styles.wrapper}>
+              <YearFilterButton />
+              <Filter />
+            </div>
+            <div className={styles.wrapper}>
+              <Button
+                text="Загрузить выписку"
+                color="rgba(66, 158, 255, 1)"
+                backgroundColor="rgba(234, 245, 255, 1)"
+              />
+              <Button
+                text="Правила"
+                color="white"
+                backgroundColor="rgba(66, 158, 255, 1)"
+              />
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                {TableDataTitle.map((title, index) => (
+                  <th key={index}>{title}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {TableDataBody.map((item) => (
+                <tr key={item.id} className={styles.tableRow}>
+                  <td>{item.date}</td>
+                  <td>{formatNumber(item.amount)}</td>
+                  <td>{formatNumber(item.cost)}</td>
+
+                  <td>{item.bank}</td>
+
+                  <td>{item.contractor}</td>
+                  <td>{item.status}</td>
+                  <td>{item.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Pagination totalPages={5} currentPage={1} onPageChange />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MainPage;
