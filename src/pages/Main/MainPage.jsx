@@ -4,6 +4,7 @@ import YearFilterButton from "../../components/YearFilterButton/YearFilterButton
 import Filter from "../../components/Filter/Filter";
 import Button from "../../components/Button/Button";
 import Pagination from "../../components/Pagination/Pagination";
+import Dropdown from "../../components/Dropdown/Dropdown";
 import FilterBtn from "../../assets/icons/ic_filter 16.svg";
 import styles from "./styles.module.scss";
 
@@ -24,7 +25,7 @@ const TableDataBody = [
     cost: 999999000.0,
     bank: "Точка",
     contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
-    status: 2,
+    status: 0,
     description:
       "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
   },
@@ -35,7 +36,7 @@ const TableDataBody = [
     cost: 999999000.0,
     bank: "Точка",
     contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
-    status: 2,
+    status: 1,
     description:
       "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
   },
@@ -57,7 +58,7 @@ const TableDataBody = [
     cost: 999999000.0,
     bank: "Точка",
     contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
-    status: 2,
+    status: 1,
     description:
       "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
   },
@@ -121,11 +122,11 @@ const MainPage = () => {
                   <td>{item.date}</td>
                   <td>{formatNumber(item.amount)}</td>
                   <td>{formatNumber(item.cost)}</td>
-
                   <td>{item.bank}</td>
-
                   <td>{item.contractor}</td>
-                  <td>{item.status}</td>
+                  <td className={styles.dropdownBlock}>
+                    <Dropdown status={item.status} />
+                  </td>
                   <td>{item.description}</td>
                 </tr>
               ))}
