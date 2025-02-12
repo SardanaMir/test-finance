@@ -5,6 +5,7 @@ import Filter from "../../components/Filter/Filter";
 import Button from "../../components/Button/Button";
 import Pagination from "../../components/Pagination/Pagination";
 import Dropdown from "../../components/Dropdown/Dropdown";
+import Modal from "../../components/Modal/Modal";
 import FilterBtn from "../../assets/icons/ic_filter 16.svg";
 import styles from "./styles.module.scss";
 
@@ -76,12 +77,23 @@ const TableDataBody = [
 ];
 
 const MainPage = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(true);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const formatNumber = (number) => {
     return number.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
   };
+
   return (
     <div className={styles.main}>
       <Header />
@@ -95,7 +107,7 @@ const MainPage = () => {
               <YearFilterButton />
               <Filter />
             </div>
-            <div className={styles.wrapper}>
+            <div className={styles.btnWrapper}>
               <Button
                 text="Загрузить выписку"
                 color="rgba(66, 158, 255, 1)"
@@ -133,6 +145,11 @@ const MainPage = () => {
             </tbody>
           </table>
           <Pagination totalPages={5} currentPage={1} onPageChange />
+          <Modal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            totalAmount={100000}
+          />
         </div>
       </div>
     </div>
