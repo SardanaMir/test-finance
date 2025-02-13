@@ -1,5 +1,8 @@
 import React from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import errorImg from "../../assets/icons/warning_ic.svg";
+import successImg from "../../assets/icons/success_ic.svg";
 import styles from "./styles.module.scss";
 
 const Modal = ({ isOpen, onClose, totalAmount }) => {
@@ -10,6 +13,8 @@ const Modal = ({ isOpen, onClose, totalAmount }) => {
   const formattedTotalAmount = new Intl.NumberFormat("ru-RU").format(
     totalAmount
   );
+  const ErrorIcon = () => <img src={errorImg} alt="Error" />;
+  const SuccessIcon = () => <img src={successImg} alt="Success" />;
 
   React.useEffect(() => {
     if (amount1 !== "") {
@@ -72,7 +77,7 @@ const Modal = ({ isOpen, onClose, totalAmount }) => {
     return null;
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const sum_for_net_profit_withdrawal = event.target.amount1.value;
     const sum_for_transfer_to_cashbox = event.target.amount2.value;
@@ -83,8 +88,32 @@ const Modal = ({ isOpen, onClose, totalAmount }) => {
       sum_for_transfer_to_cashbox,
     };
 
-    axios
-      .post(
+    try {
+      toast.info("Ожидание", {
+        position: "top-right",
+        autoClose: true,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        toastId: "waiting-toast",
+        style: {
+          backgroundImage:
+            "linear-gradient(to right, rgba(132, 150, 175, 1) 18.8%, white 18.9%)",
+          borderRadius: "1rem",
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+          fontSize: "1.2rem",
+          width: "340px",
+          height: "85px",
+          display: "grid",
+          gridTemplateColumns: "18.8fr 81.2fr",
+          alignItems: "center",
+          justifyContent: "center",
+          justifyItems: "center",
+        },
+        icon: ErrorIcon,
+      });
+      const response = await axios.post(
         "http://busyboard-test.ru/api/v1/bank/operations/transfer-to-cashbox/",
         collectedData,
         {
@@ -92,14 +121,57 @@ const Modal = ({ isOpen, onClose, totalAmount }) => {
             "Content-Type": "application/json",
           },
         }
-      )
-      .then((response) => {
-        console.log("Успешный ответ:", response.data);
-      })
-      .catch((error) => {
-        console.error("Ошибка:", error);
+      );
+      toast.success("Все изменения успешно сохранены!", {
+        position: "top-right",
+        hideProgressBar: true,
+        autoClose: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        style: {
+          backgroundImage:
+            "linear-gradient(to right, rgba(132, 150, 175, 1) 18.8%, white 18.9%)",
+          borderRadius: "1rem",
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+          fontSize: "1.2rem",
+          width: "340px",
+          height: "85px",
+          display: "grid",
+          gridTemplateColumns: "18.8fr 81.2fr",
+          alignItems: "center",
+          justifyContent: "center",
+          justifyItems: "center",
+        },
+        icon: <SuccessIcon />,
       });
-    onClose();
+      onClose();
+    } catch (error) {
+      toast.error(error.message, {
+        position: "top-right",
+        hideProgressBar: true,
+        autoClose: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        style: {
+          backgroundImage:
+            "linear-gradient(to right, rgba(255, 94, 91, 1) 18.8%, white 18.9%)",
+          borderRadius: "1rem",
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+          fontSize: "1.2rem",
+          width: "340px",
+          height: "85px",
+          display: "grid",
+          gridTemplateColumns: "18.8fr 81.2fr",
+          alignItems: "center",
+          justifyContent: "center",
+          justifyItems: "center",
+        },
+        icon: <ErrorIcon />,
+      });
+      console.error("Ошибка:", error);
+    }
   };
 
   return (
