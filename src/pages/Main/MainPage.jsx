@@ -137,7 +137,7 @@ const MainPage = () => {
                   <td>{item.bank}</td>
                   <td>{item.contractor}</td>
                   <td className={styles.dropdownBlock}>
-                    <Dropdown status={item.status} />
+                    <Dropdown status={item.status} openModal={openModal} />
                   </td>
                   <td>{item.description}</td>
                 </tr>
