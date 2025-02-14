@@ -1,9 +1,10 @@
 import React from "react";
 import Select from "react-select";
+import { useModal } from "../../hooks/useModal";
 import iconList from "../../assets/icons/icon_list.svg";
 import styles from "./styles.module.scss";
 
-const Dropdown = ({ status, openModal }) => {
+const Dropdown = ({ status, item }) => {
   const options = [
     { id: 1, value: "Закупочная стоимость", label: "Закупочная стоимость" },
     { id: 2, value: "Вывод ЧП", label: "Вывод ЧП" },
@@ -11,6 +12,7 @@ const Dropdown = ({ status, openModal }) => {
 
   const [selectedOption, setSelectedOption] = React.useState(null);
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
+  const { openModal } = useModal();
 
   React.useEffect(() => {
     const initialOption = options.find((option) => option.id === status);
@@ -22,7 +24,7 @@ const Dropdown = ({ status, openModal }) => {
   };
 
   const handleIconClick = () => {
-    openModal();
+    openModal(item.amount);
   };
 
   const formatOptionLabel = ({ label, id }) => {

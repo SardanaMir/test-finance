@@ -1,14 +1,15 @@
-import { useState } from "react";
-import Header from "./components/Header/Header";
-import "./App.css";
 import MainPage from "./pages/Main/MainPage";
 import ToastWrapper from "./components/ToastWrapper/ToastWrapper";
+import { ModalProvider } from "./hooks/useModal";
+import "./App.css";
 
 function App() {
   return (
     <>
-      <MainPage />
-      <ToastWrapper />
+      <ModalProvider>
+        <MainPage />
+        <ToastWrapper />
+      </ModalProvider>
     </>
   );
 }

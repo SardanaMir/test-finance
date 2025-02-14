@@ -5,53 +5,52 @@ import errorImg from "../../assets/icons/warning_ic.svg";
 import successImg from "../../assets/icons/success_ic.svg";
 import styles from "./styles.module.scss";
 
-const Modal = ({ isOpen, onClose, totalAmount }) => {
+const Modal = ({ isOpen, modalData, onClose }) => {
   const [amount1, setAmount1] = React.useState("");
   const [amount2, setAmount2] = React.useState("");
-  const [remainingAmount, setRemainingAmount] = React.useState(totalAmount);
+  const [remainingAmount, setRemainingAmount] = React.useState(modalData);
   const isSaveButtonDisabled = !amount1 && !amount2;
-  const formattedTotalAmount = new Intl.NumberFormat("ru-RU").format(
-    totalAmount
-  );
+  const formattedTotalAmount = new Intl.NumberFormat("ru-RU").format(modalData);
+
   const ErrorIcon = () => <img src={errorImg} alt="Error" />;
   const SuccessIcon = () => <img src={successImg} alt="Success" />;
 
   React.useEffect(() => {
     if (amount1 !== "") {
-      const calculatedAmount2 = totalAmount - Number(amount1);
+      const calculatedAmount2 = modalData - Number(amount1);
       if (calculatedAmount2 >= 0) {
         setAmount2(String(calculatedAmount2));
       } else {
         setAmount2("");
       }
     }
-  }, [amount1, totalAmount]);
+  }, [amount1, modalData]);
 
   React.useEffect(() => {
     if (amount2 !== "") {
-      const calculatedAmount1 = totalAmount - Number(amount2);
+      const calculatedAmount1 = modalData - Number(amount2);
       if (calculatedAmount1 >= 0) {
         setAmount1(String(calculatedAmount1));
       } else {
         setAmount1("");
       }
     }
-  }, [amount2, totalAmount]);
+  }, [amount2, modalData]);
 
   React.useEffect(() => {
     let calculatedRemainingAmount =
-      totalAmount - (Number(amount1) || 0) - (Number(amount2) || 0);
+      modalData - (Number(amount1) || 0) - (Number(amount2) || 0);
     if (calculatedRemainingAmount < 0) {
       calculatedRemainingAmount = 0;
     }
 
     setRemainingAmount(calculatedRemainingAmount);
-  }, [amount1, amount2, totalAmount]);
+  }, [amount1, amount2, modalData]);
 
   const handleAmount1Change = (event) => {
     let value = Number(event.target.value);
-    if (value > totalAmount) {
-      value = totalAmount;
+    if (value > modalData) {
+      value = modalData;
     }
     if (value < 0) {
       value = 0;
@@ -63,8 +62,8 @@ const Modal = ({ isOpen, onClose, totalAmount }) => {
   const handleAmount2Change = (event) => {
     let value = Number(event.target.value);
 
-    if (value > totalAmount) {
-      value = totalAmount;
+    if (value > modalData) {
+      value = modalData;
     }
     if (value < 0) {
       value = 0;
@@ -209,7 +208,7 @@ const Modal = ({ isOpen, onClose, totalAmount }) => {
               placeholder="Введите сумму оплаты"
               value={amount1}
               min="0"
-              max={totalAmount}
+              max={modalData}
               onChange={handleAmount1Change}
               required
             />
@@ -232,7 +231,7 @@ const Modal = ({ isOpen, onClose, totalAmount }) => {
               value={amount2}
               onChange={handleAmount2Change}
               min="0"
-              max={totalAmount}
+              max={modalData}
               required
             />
           </div>
