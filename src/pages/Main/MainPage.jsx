@@ -6,75 +6,13 @@ import Button from "../../components/Button/Button";
 import Pagination from "../../components/Pagination/Pagination";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Modal from "../../components/Modal/Modal";
-import FilterBtn from "../../assets/icons/ic_filter 16.svg";
+import tableData from "../../data/tableData.json";
+import { useModal } from "../../hooks/useModal";
 import styles from "./styles.module.scss";
 
-const TableDataTitle = [
-  "Дата",
-  "Приход",
-  "Расход",
-  "Банк",
-  "Контрагент",
-  "Статья",
-  "Описание",
-];
-const TableDataBody = [
-  {
-    id: 1,
-    date: "10.01.2025",
-    amount: 555000,
-    cost: 10000,
-    bank: "Точка",
-    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
-    status: 0,
-    description:
-      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
-  },
-  {
-    id: 2,
-    date: "10.01.2025",
-    amount: 444000,
-    cost: 9000,
-    bank: "Точка",
-    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
-    status: 1,
-    description:
-      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
-  },
-  {
-    id: 3,
-    date: "10.01.2025",
-    amount: 333000,
-    cost: 11000,
-    bank: "Точка",
-    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
-    status: 2,
-    description:
-      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
-  },
-  {
-    id: 4,
-    date: "10.01.2025",
-    amount: 222000,
-    cost: 2200,
-    bank: "Точка",
-    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
-    status: 1,
-    description:
-      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
-  },
-];
-
 const MainPage = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const { isModalOpen, openModal, closeModal, modalData } = useModal();
+  const { title: TableDataTitle, body: TableDataBody } = tableData;
 
   const formatNumber = (number) => {
     return number.toLocaleString(undefined, {
@@ -126,7 +64,11 @@ const MainPage = () => {
                   <td>{item.bank}</td>
                   <td>{item.contractor}</td>
                   <td className={styles.dropdownBlock}>
-                    <Dropdown status={item.status} openModal={openModal} />
+                    <Dropdown
+                      status={item.status}
+                      openModal={openModal}
+                      item={item}
+                    />
                   </td>
                   <td>{item.description}</td>
                 </tr>
@@ -137,7 +79,7 @@ const MainPage = () => {
           <Modal
             isOpen={isModalOpen}
             onClose={closeModal}
-            totalAmount={100000}
+            modalData={modalData}
           />
         </div>
       </div>
