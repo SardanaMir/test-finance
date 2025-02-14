@@ -22,8 +22,8 @@ const TableDataBody = [
   {
     id: 1,
     date: "10.01.2025",
-    amount: 999999000.0,
-    cost: 999999000.0,
+    amount: 555000,
+    cost: 10000,
     bank: "Точка",
     contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
     status: 0,
@@ -33,8 +33,8 @@ const TableDataBody = [
   {
     id: 2,
     date: "10.01.2025",
-    amount: 999999000.0,
-    cost: 999999000.0,
+    amount: 444000,
+    cost: 9000,
     bank: "Точка",
     contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
     status: 1,
@@ -44,8 +44,8 @@ const TableDataBody = [
   {
     id: 3,
     date: "10.01.2025",
-    amount: 999999000.1,
-    cost: 999999000.0,
+    amount: 333000,
+    cost: 11000,
     bank: "Точка",
     contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
     status: 2,
@@ -55,29 +55,18 @@ const TableDataBody = [
   {
     id: 4,
     date: "10.01.2025",
-    amount: 999999000.0,
-    cost: 999999000.0,
+    amount: 222000,
+    cost: 2200,
     bank: "Точка",
     contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
     status: 1,
     description:
       "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
   },
-  {
-    id: 5,
-    date: "10.01.2025",
-    amount: 999999000.0,
-    cost: 999999000.0,
-    bank: "Точка",
-    contractor: "Общество с ограниченной отвественностью “Интернет Решения”",
-    status: 2,
-    description:
-      "Отчет за период Отчет за период период Отчет за период Отчет за период период п...",
-  },
 ];
 
 const MainPage = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState(true);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
