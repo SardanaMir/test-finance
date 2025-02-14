@@ -1,9 +1,9 @@
 .header {
   height: 5.38rem;
+  padding: 0 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.25rem;
   background-color: rgba(255, 255, 255, 1);
 }
 .wrapper {
@@ -19,7 +19,6 @@
   align-items: center;
 }
 .menu {
-  width: 534.125rem;
   display: flex;
   justify-content: space-between;
   color: rgba(53, 55, 58, 1);

@@ -22,7 +22,6 @@ const Dropdown = ({ status, openModal }) => {
   };
 
   const handleIconClick = () => {
-    setShowModal(true);
     openModal();
   };
 
